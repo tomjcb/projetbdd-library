@@ -1,0 +1,191 @@
+/*
+------------------------------------------------------------------------------------------------------------------------
+                                            Mise en forme du body
+*/
+
+body{
+    margin : 0;
+}
+
+.row{
+    margin:0;
+    padding: 15px;
+}
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+                                            Mise en forme du top de la page
+                                            (Bannière + barre de nav)
+*/
+
+/* Bannière : */
+img.banner{
+    width: 100%;
+}
+
+
+/* Barre de nav : */
+div.top{
+    background-color: #17a2b8;
+    height: 50px;
+}
+
+nav.nav{
+    visibility:visible;
+    z-index:5;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.titreMenu {
+    height: 50px;
+}
+
+.boutonMenu {
+    display:block;
+    float: left;
+    height: 50px;
+    background-color: #17a2b8;
+    padding: 10px;
+    padding-top: auto;
+    text-align: center;
+    vertical-align:middle;
+    z-index:7;
+    overflow: hidden;  /*important*/
+    color:white;
+    border-radius: 0.25rem;
+}
+.boutonMenu:hover {
+    height: auto;
+    cursor: pointer;
+    background-color: white;
+    padding:9px;
+    color:#17a2b8;
+    border:1px solid #17a2b8;
+    border-radius: 0 0 0.25rem 0.25rem;
+}
+
+.SousMenu {
+    display: block;
+    padding:15px;
+    border: 1px solid white;
+    background-color: #17a2b8;
+    z-index:8;
+    color:white;
+    vertical-align:middle;
+    text-decoration:none;
+    font-size: 15px;
+    border-radius: 0.25rem;
+}
+.SousMenu:hover {
+    background:white;
+    text-decoration:none;
+    color:#17a2b8;
+    border: 1px solid #17a2b8;
+    border-radius: 0.25rem;
+}
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+                                            Mise en forme des éléments du contenu
+*/
+
+.title{
+    text-align: center;
+    padding: 35px;
+    font-size: 30px;
+    font-weight: bold;
+    background-color: #6c757d;
+    color: white;
+    border: solid 5px #17a2b8;
+    border-radius: 0.25rem ;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-primary{
+    color : white;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-primary:hover {
+    color: #17a2b8;
+    background-color: white;
+    border-color: #17a2b8;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+    color: #17a2b8;
+    background-color: white;
+    border-color: #17a2b8;
+}
+
+.scnd{
+    text-align: right;
+}
+
+
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+                                            Mise en forme des formulaires
+*/
+
+
+form{
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+                                            Mise en forme des tableaux
+*/
+
+.table-responsive{
+    padding:15px;
+}
+
+table{
+    margin-left: auto;
+    margin-right:auto;
+    text-align: center;
+    border-radius: 0.25rem;
+}
+
+.table-head tr{
+    color: white;
+    background-color: #17a2b8;
+    border-radius: 0.25rem;
+    border-color: #BE8B3D;;
+}
+
+table a{
+    margin:0;
+}
+
+.table-bordered{
+    border-color: #BE8B3D;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(13, 162, 184, 0.3) ;
+}
+
+.table th{
+    vertical-align: middle;
+    border-color: #BE8B3D;
+}
+
+.table td{
+    vertical-align: middle;
+    border-color: #BE8B3D;
+}
+
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+*/

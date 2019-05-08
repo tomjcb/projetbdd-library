@@ -20,4 +20,5 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
 
     <!-- affichage(vue) relatif à la page -->
 
+
 <?php include ("v_foot.php");  ?>
