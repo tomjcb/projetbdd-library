@@ -5,6 +5,7 @@
 
 body{
     margin : 0;
+
 }
 
 .row{
@@ -31,8 +32,6 @@ div.top{
 }
 
 nav.nav{
-    visibility:visible;
-    z-index:5;
     font-size: 20px;
     font-weight: bold;
 }
@@ -85,6 +84,40 @@ nav.nav{
     border-radius: 0.25rem;
 }
 
+
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+                                            Mise en forme des éléments de la page d'accueil
+*/
+
+/* Index */
+.title-index{
+    text-align: center;
+    padding: 35px;
+    font-size: 30px;
+    font-weight: bold;
+    background-color: #6c757d;
+    color: white;
+    border: solid 5px #17a2b8;
+    width: 100%;
+    border-radius: 0.25rem ;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.formulaires{
+    display:block;
+    float: left;
+    text-align: center;
+    padding-top: 25px;
+}
+
+h4{
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
 /*
 ------------------------------------------------------------------------------------------------------------------------
                                             Mise en forme des éléments du contenu
@@ -93,6 +126,7 @@ nav.nav{
 .title{
     text-align: center;
     padding: 35px;
+    margin-top: 20px;
     font-size: 30px;
     font-weight: bold;
     background-color: #6c757d;
@@ -101,6 +135,10 @@ nav.nav{
     border-radius: 0.25rem ;
     margin-left: auto;
     margin-right: auto;
+}
+
+.btn{
+    font-weight: bold;
 }
 
 .btn-primary{
@@ -160,7 +198,7 @@ table{
     color: white;
     background-color: #17a2b8;
     border-radius: 0.25rem;
-    border-color: #BE8B3D;;
+    border-color: #17a2b8;
 }
 
 table a{
@@ -168,7 +206,7 @@ table a{
 }
 
 .table-bordered{
-    border-color: #BE8B3D;
+    border-color: #17a2b8;
 }
 
 .table-hover tbody tr:hover {
@@ -177,12 +215,12 @@ table a{
 
 .table th{
     vertical-align: middle;
-    border-color: #BE8B3D;
+    border-color: #6c757d;
 }
 
 .table td{
     vertical-align: middle;
-    border-color: #BE8B3D;
+    border-color: #17a2b8;
 }
 
 

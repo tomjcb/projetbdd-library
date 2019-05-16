@@ -17,15 +17,18 @@ $donnees = $reponse->fetchAll();
 ?>
 
 <div class="row">
-    <a href="Auteur_add.php"> Ajouter un Auteur </a>
-    <table border="2">
+    <div class="title">Gestion des auteurs</div>
+</div>
+<div class="row">
+    <div class="container">
+    <table class="table table-bordered table-hover">
         <caption> Récapitulatifs des Auteurs </caption>
         <?php if(isset($donnees[0])): ?>
-            <thead>
+            <thead class="table-head">
             <tr><th>Nom</th>
                 <th>Prénom</th>
                 <th>Nombre d'oeuvres</th>
-                <th>Opération</th>
+                <th>Opérations</th>
             </tr>
             </thead>
             <tbody>
@@ -38,12 +41,12 @@ $donnees = $reponse->fetchAll();
                         <?php echo($value['prenomAuteur']); ?>
                     </td>
                     <td>
-                        <center><?php echo $value['nbrOeuvre']; ?></center>
+                        <?php echo $value['nbrOeuvre']; ?>
                     </td>
                     <td>
-                        <a class="btn btn-primary" href="Auteur_edit.php?id=<?= $value['idAuteur']; ?>"> Modifier </a>
+                        <a class="btn btn-info" href="Auteur_edit.php?id=<?= $value['idAuteur']; ?>"><i class="fa fa-wrench"></i></a>
                         <a> | </a>
-                        <a class="btn btn-danger" href="Auteur_delete.php?id=<?= $value['idAuteur']; ?>"> Supprimer </a>
+                        <a class="btn btn-danger" href="Auteur_delete.php?id=<?= $value['idAuteur']; ?>"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -56,4 +59,10 @@ $donnees = $reponse->fetchAll();
             </tr>
         <?php endif; ?>
     </table>
+    </div>
+</div>
+<div class="row">
+    <div class="container scnd">
+        <a class="btn btn-lg btn-primary" href="Auteur_add.php"> Ajouter un Auteur </a>
+    </div>
 </div>

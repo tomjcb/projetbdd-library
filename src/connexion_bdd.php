@@ -7,10 +7,10 @@
  */?>
 
 <?php
-define("hostname","serveurmysql");
-define("database","BDD_tjacob3");
-define("username","tjacob3");
-define("password","1007");
+define("hostname","localhost");
+define("database","mysql");
+define("username","root");
+define("password","");
 
 $dsn = 'mysql:dbname='.database.';host='.hostname.';charset=utf8';
 

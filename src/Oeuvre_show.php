@@ -29,7 +29,7 @@ $donnees = $reponse->fetchAll();
     <div class="container">
         <div class="table-responsive-sm">
         <table class="table table-bordered table-hover">
-            <caption> Recapitulatifs des Oeuvres </caption>
+            <caption> Récapitulatif des œuvres </caption>
             <?php if(isset($donnees[0])): ?>
                 <thead class="table-head">
                 <tr>
@@ -39,7 +39,7 @@ $donnees = $reponse->fetchAll();
                     <th>Nbr. </th>
                     <th>Nbr. disponible </th>
                     <th>Exemplaires</th>
-                    <th>Opération</th>
+                    <th>Opérations</th>
                 </tr>
                 </thead>
                 <tbody>
