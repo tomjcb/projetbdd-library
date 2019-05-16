@@ -1,17 +1,11 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: tjacob3
- * Date: 26/03/19
- * Time: 18:15
- */?>
+
 
 <div class="top">
     <div class="container">
         <nav class="col-md-12 nav">
             <div class="boutonMenu col-md-4">
                 <div class="titreMenu">Gestion des emprunts</div>
-                <a class="SousMenu" href="Emprunt_add.php">Emprunter des livres</a>
+                <a class="SousMenu" href="Emprunt_add2.php">Emprunter des livres</a>
                 <a class="SousMenu" href="Emprunt_return.php">Rendre des livres</a>
                 <a class="SousMenu" href="Emprunt_show.php">Supprimer des emprunts</a>
                 <a class="SousMenu" href="Emprunt_bilan.php">Consulter les retards</a>

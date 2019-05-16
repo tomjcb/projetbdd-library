@@ -37,7 +37,6 @@ if (!empty($_POST["nomAuteur"]) AND isset($_POST['prenomAuteur'])) {
 
 ?>
 
-<body>
 <form method="post" action="Auteur_add.php">
     <div class="row">
         <fieldset>
@@ -63,4 +62,5 @@ if (!empty($_POST["nomAuteur"]) AND isset($_POST['prenomAuteur'])) {
         </fieldset>
     </div>
 </form>
-</body>
+
+<?php include ("v_foot.php");

@@ -56,13 +56,13 @@ $donnees2 = $reponse2->fetchAll();
                                     <?php echo " exemplaire(s) emprunté(s)" ?>
                                 <?php endif; ?>
                             <?php endforeach; ?>
-                            </br>
                             <?php
 
                             if ($value['retard'] != '0') {
+                                ?><p class="retard"><?php
                                 echo $value['retard'], date("d/m/Y", strtotime($value['datePaiementFutur']));
                             }else {
-                                echo " ";
+                                echo " ";?></p><?php
                             }
                             ?>
                             </br>
