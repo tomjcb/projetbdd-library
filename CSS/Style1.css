@@ -122,6 +122,13 @@ h4{
 ------------------------------------------------------------------------------------------------------------------------
                                             Mise en forme des éléments du contenu
 */
+.alert{
+    text-align: center;
+}
+
+alert-danger{
+    text-align: center;
+}
 
 .title{
     text-align: center;
@@ -132,6 +139,20 @@ h4{
     background-color: #6c757d;
     color: white;
     border: solid 5px #17a2b8;
+    border-radius: 0.25rem ;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title_oeuvre{
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #17a2b8;
+    color: black;
+    border: solid 5px #6c757d;
     border-radius: 0.25rem ;
     margin-left: auto;
     margin-right: auto;
@@ -158,6 +179,17 @@ h4{
     color: #17a2b8;
     background-color: white;
     border-color: #17a2b8;
+}
+
+.confirmSuppr{
+    text-align: center;
+    padding: 15px;
+    background-color: #f8d7da;
+    color: black;
+    border: solid 5px #f5c6cb;
+    border-radius: 0.25rem ;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .scnd{
