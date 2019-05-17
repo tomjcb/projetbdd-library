@@ -1,5 +1,6 @@
-<?php
-include ('connexion_bdd.php');
+<?php include("v_head.php"); ?>
+<?php include ('v_nav.php'); ?>
+<?php include ('connexion_bdd.php');
 
 if(isset($_GET["id"]) AND is_numeric($_GET["id"])){
     $id = htmlentities($_GET['id']);
@@ -20,20 +21,38 @@ if (isset($_POST['titre']) and isset($_POST['dateParution']) and isset($_POST['a
     $donnees['idAuteur'] = htmlentities($_POST['auteurs']);
     $donnees['noOeuvre'] = htmlentities($_POST['noOeuvre']);
 
-    if (! preg_match("/^[A-Za-z]{2,}/", $donnees['titre']))
+    if (! preg_match("/^[A-Za-z]{2,}/", $donnees['titre'])) {
         $erreurs['titre'] = 'Titre : au moins de deux caractères';
-    if (! preg_match("#^([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})$#", $donnees['dateParution'], $matches))
-        $erreurs['dateParution'] = 'La date doit être au format AAAA-MM-JJ';
+    }
+    if (empty($donnees['dateParution'])){ //Check les erreurs de date
+        $erreurs['dateParution'] = 'La date doit être non vide';
+    }
     else {
-        //vardump($matches);
-        if (checkdate($matches[1], $matches[2], $matches[3])) {
+        //On scinde la chaîne de cara en 3 éléments stockés dans un Array
+        $time=explode("-", $donnees['dateParution']);
+        $year= (int)$time[0];
+
+        if(isset($time[1])){//Si la date a bien pu être découpée, on stocke la valeur
+            $month= (int)$time[1];
+        }
+        else{//Sinon on donne une valeur trop haute pour provoquer une erreur
+            $month = 99;
+        }
+
+        if(isset($time[2])){//Pareil
+            $day = (int)$time[2];
+        }
+        else{
+            $day = 99;
+        }
+
+        if (!checkdate($month, $day, $year)) {//On regarde si la date est correcte
             $erreurs['dateParution'] = 'Date invalide';
         }
-        else $donnees['dateParution_us'] = $matches[3] . "-".$matches[2] . "-" . $matches[1];
+
     }
 
-    /*if (!is_numeric($donnees['idAuteur']))
-        $erreurs['idAuteur'] = 'Id auteur : chiffre ou nombre seulement';*/
+
 
     if (empty($erreurs)) {
         // ## Accès au modèle:
@@ -49,8 +68,7 @@ if (isset($_POST['titre']) and isset($_POST['dateParution']) and isset($_POST['a
 }
 ?>
 
-<?php include("v_head.php"); ?>
-<?php include ('v_nav.php'); ?>
+
 <div class="row">
     <div class="title">Modifier une oeuvre</div>
 </div>

@@ -19,19 +19,38 @@ if (isset($_POST['idAdherent']) and isset($_POST['nomAdherent']) and isset($_POS
     $donnees['idAdherent'] = $_POST['idAdherent'];
     $donnees['nomAdherent'] = htmlentities($_POST['nomAdherent']);
     $donnees['adresse'] = htmlentities($_POST['adresse']);
+    $donnees['datePaiement'] = htmlentities($_POST['datePaiement']);
 
     if (! preg_match("/^[A-Za-z]{2,}/", $donnees['nomAdherent']))
         $erreurs['nomAdherent'] = 'Nom composé de 2 lettres minimum';
     if (! preg_match("/^[A-Za-z]{2,}/", $donnees['adresse']))
         $erreurs['adresse'] = 'Adresse composée de 2 lettres minimum';
-    if (! preg_match("#^([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})$#", $donnees['datePaiement'], $matches))
-        $erreurs['datePaiement'] = 'La date doit être au format AAAA-MM-JJ';
+    if (empty($donnees['datePaiement'])){ //Check les erreurs de date
+        $erreurs['datePaiement'] = 'La date doit être non vide';
+    }
     else {
-        //vardump($matches);
-        if (checkdate($matches[1], $matches[2], $matches[3])) {
+        //On scinde la chaîne de cara en 3 éléments stockés dans un Array
+        $time=explode("-", $donnees['datePaiement']);
+        $year= (int)$time[0];
+
+        if(isset($time[1])){//Si la date a bien pu être découpée, on stocke la valeur
+            $month= (int)$time[1];
+        }
+        else{//Sinon on donne une valeur trop haute pour provoquer une erreur
+            $month = 99;
+        }
+
+        if(isset($time[2])){//Pareil
+            $day = (int)$time[2];
+        }
+        else{
+            $day = 99;
+        }
+
+        if (!checkdate($month, $day, $year)) {//On regarde si la date est correcte
             $erreurs['datePaiement'] = 'Date invalide';
         }
-        else $donnees['datePaiement_us'] = $matches[3] . "-".$matches[2] . "-" . $matches[1];
+
     }
 
     if (empty($erreurs)) {
@@ -47,32 +66,51 @@ if (isset($_POST['idAdherent']) and isset($_POST['nomAdherent']) and isset($_POS
     }
 }
 ?>
+<div class="row">
+    <div class="title">Modifier un adhérent</div>
+</div>
 
 <form method="post" action="Adherent_edit.php">
     <div class="row">
-        <fieldset>
-            <legend>Modifier cet adhérent</legend>
+        <fieldset class="element-center">
             <!-- ## Pour conserver la valeur de l'id -->
             <input name="idAdherent" type="hidden" value="<?php if (isset($donnees['idAdherent'])) echo $donnees['idAdherent'] ?>">
 
-            <label>Nom de l'adhérent</label>
-            <input type="text" name="nomAdherent" size="18" value="<?php if (isset($donnees['nomAdherent'])) echo $donnees['nomAdherent'] ?>" >
-            <?php if (isset($erreurs['nomAdherent']))
-                echo '<div class="alertdanger">'.$erreurs['nomAdherent'].'</div>';
-            ?>
-            <label>Adresse de l'adhérent</label>
-            <input type="text" name="adresse" size="18" value="<?php if (isset($donnees['adresse'])) echo $donnees['adresse'] ?>" >
-            <?php if (isset($erreurs['adresse']))
-                echo '<div class="alertdanger">'.$erreurs['adresse'].'</div>';
-            ?>
+            <div class="col-md-2 offset-md-5">
+                <label>Nom de l'adhérent</label>
+                <br>
+                <input type="text" class="form-control" name="nomAdherent" size="18" value="<?php if (isset($donnees['nomAdherent'])) echo $donnees['nomAdherent'] ?>" >
+                <?php if (isset($erreurs['nomAdherent']))
+                    echo '<br><div class="alert alert-danger">'.$erreurs['nomAdherent'].'</div>';
+                ?>
+            </div>
 
-            <label>Date de paiement</label>
-            <input type="date" name="datePaiement" placeholder="aaaa/mm/jj" value="<?php if (isset($donnees['datePaiement'])) {echo $donnees['datePaiement']; }else {date('Y-m-d');}?>">
-            <?php if (isset($erreurs['datePaiement']))
-                echo '<div class="alertdanger">'.$erreurs['datePaiement'].'</div>';
-            ?>
+            <br><br>
+
+            <div class="col-md-2 offset-md-5">
+                <label>Adresse de l'adhérent</label>
+                <br>
+                <input type="text" class="form-control" name="adresse" size="18" value="<?php if (isset($donnees['adresse'])) echo $donnees['adresse'] ?>" >
+                <?php if (isset($erreurs['adresse']))
+                    echo '<br><div class="alert alert-danger">'.$erreurs['adresse'].'</div>';
+                ?>
+            </div>
+
+            <br><br>
+
+            <div class="col-md-2 offset-md-5">
+                <label>Date de paiement</label>
+                <input type="text" class="form-control" name="datePaiement" placeholder="aaaa/mm/jj" value="<?php if (isset($donnees['datePaiement'])) {echo $donnees['datePaiement']; }?>">
+                <?php if (isset($erreurs['datePaiement']))
+                    echo '<br><div class="alert alert-danger">'.$erreurs['datePaiement'].'</div>';
+                ?>
+            </div>
+
+            <br><br>
 
             <input type="submit" name="ModifierAdherent" value="Modifier" >
         </fieldset>
     </div>
 </form>
+
+<?php include ("v_foot.php");  ?>

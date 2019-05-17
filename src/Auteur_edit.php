@@ -36,26 +36,43 @@ if (isset($_POST['idAuteur']) and isset($_POST['nomAuteur']) and isset($_POST['p
     }
 }
 ?>
+<div class="row">
+    <div class="title">Modifier un auteur</div>
+</div>
 
 <form method="post" action="Auteur_edit.php">
     <div class="row">
-        <fieldset>
-            <legend>Modifier un auteur</legend>
+        <fieldset class="element-center">
             <!-- ## Pour conserver la valeur de l'id -->
             <input name="idAuteur" type="hidden" value="<?php if (isset($donnees['idAuteur'])) echo $donnees['idAuteur'] ?>">
-            <label>Nom auteur</label>
-            <input type="text" name="nomAuteur" size="18" value="<?php if (isset($donnees['nomAuteur'])) echo $donnees['nomAuteur'] ?>" >
-            <?php if (isset($erreurs['nomAuteur']))
-                echo '<div class="alertdanger">'.$erreurs['nomAuteur'].'</div>';
-            ?>
 
-            <label>Prénom auteur</label>
-            <input type="text" name="prenomAuteur" size="18" value="<?php if (isset($donnees['prenomAuteur'])) echo $donnees['prenomAuteur'] ?>" >
-            <?php if (isset($erreurs['prenomAuteur']))
-                echo '<div class="alertdanger">'.$erreurs['prenomAuteur'].'</div>';
-            ?>
+            <div class="col-md-2 offset-md-5">
+                <label>Nom auteur</label>
+                <br>
+                <input type="text" class="form-control" name="nomAuteur" size="18" value="<?php if (isset($donnees['nomAuteur'])) echo $donnees['nomAuteur'] ?>" >
+                <?php if (isset($erreurs['nomAuteur']))
+                    echo '<br><div class="alert alert-danger">'.$erreurs['nomAuteur'].'</div>';
+                ?>
+            </div>
 
-            <input type="submit" name="ModifierAuteur" value="Modifier" >
+            <br><br>
+
+            <div class="col-md-2 offset-md-5">
+                <label>Prénom auteur</label>
+                <br>
+                <input type="text" class="form-control" name="prenomAuteur" size="18" value="<?php if (isset($donnees['prenomAuteur'])) echo $donnees['prenomAuteur'] ?>" >
+                <?php if (isset($erreurs['prenomAuteur']))
+                    echo '<br><div class="alert alert-danger">'.$erreurs['prenomAuteur'].'</div>';
+                ?>
+            </div>
+
+            <br><br>
+
+            <input type="submit" class="btn btn-info" name="ModifierAuteur" value="Modifier" >
         </fieldset>
     </div>
 </form>
+
+<?php include ('v_foot.php'); ?>
+
+
