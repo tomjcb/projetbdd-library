@@ -3,7 +3,7 @@
 <?php include ("connexion_bdd.php");
 
 // traitement
-if (!empty($_POST["nomAuteur"]) AND isset($_POST['prenomAuteur'])) {
+if (isset($_POST["nomAuteur"]) AND isset($_POST['prenomAuteur'])) {
     // controle des données
     $donnees['nomAuteur'] = htmlentities($_POST['nomAuteur']);
     $donnees['prenomAuteur'] = htmlentities($_POST['prenomAuteur']);
@@ -11,10 +11,8 @@ if (!empty($_POST["nomAuteur"]) AND isset($_POST['prenomAuteur'])) {
     if (! preg_match("/^[A-Za-z]{2,}/", $donnees['nomAuteur'])) {
         $erreurs['nomAuteur'] = 'Nom composé de 2 lettres minimum';
     }
-    if (!empty($_POST['prenomAuteur'])) {
-        if (! preg_match("/^[A-Za-z]{2,}/", $donnees['prenomAuteur'])){
-            $erreurs['prenomAuteur'] = 'Prenom composé de 2 lettres minimum';
-        }
+    if (! preg_match("/^[A-Za-z]{2,}/", $donnees['prenomAuteur'])){
+        $erreurs['prenomAuteur'] = 'Prenom composé de 2 lettres minimum';
     }
 
     if (empty($erreurs)) {
@@ -37,28 +35,37 @@ if (!empty($_POST["nomAuteur"]) AND isset($_POST['prenomAuteur'])) {
 
 ?>
 
+<div class="row">
+    <div class="title">Ajouter un auteur</div>
+</div>
+
 <form method="post" action="Auteur_add.php">
     <div class="row">
-        <fieldset>
-            <legend>Ajouter un auteur</legend>
+        <fieldset class="element-center">
 
-            <div class="col-xs-12 col-md-12">
-                <div class="form-group">
-                    <label>Nom de l'Auteur : </label>
-                    <input class="form-control" type="text" name="nomAuteur" value="<?php if(isset($donnees["nomAuteur"])) echo $donnees['nomAuteur']; ?>">
-                    <small class="error"><?php if (isset($erreurs["nomAuteur"])) echo $erreurs["nomAuteur"]; ?></small>
-                </div>
+            <div class="col-md-2 offset-md-5">
+                <label>Nom de l'Auteur :</label>
+                <br>
+                <input class="form-control" type="text" name="nomAuteur" value="<?php if(isset($donnees["nomAuteur"])) echo $donnees['nomAuteur']; ?>">
+                <?php if (isset($erreurs['nomAuteur']))
+                    echo '<br><div class="alert alert-danger">'.$erreurs['nomAuteur'].'</div>';
+                ?>
             </div>
 
-            <div class="col-xs-12 col-md-12">
-                <div class="form-group">
-                    <label>Prénom : </label>
-                    <input class="form-control" type="text" name="prenomAuteur" value="<?php if(isset($_POST["prenomAuteur"])) echo $donnees['prenomAuteur']; ?>">
-                    <small class="error"><?php if (isset($erreurs["prenomAuteur"])) echo $erreurs["prenomAuteur"]; ?></small>
-                </div>
+            <br><br>
+
+            <div class="col-md-2 offset-md-5">
+                <label>Prénom : </label>
+                <br>
+                <input class="form-control" type="text" name="prenomAuteur" value="<?php if(isset($_POST["prenomAuteur"])) echo $donnees['prenomAuteur']; ?>">
+                <?php if (isset($erreurs['prenomAuteur']))
+                    echo '<br><div class="alert alert-danger">'.$erreurs['prenomAuteur'].'</div>';
+                ?>
             </div>
 
-            <input name="addAuteur" type="submit" value="Ajouter un auteur">
+            <br><br>
+
+            <input name="addAuteur" class="btn btn-info" type="submit" value="Ajouter un auteur">
         </fieldset>
     </div>
 </form>

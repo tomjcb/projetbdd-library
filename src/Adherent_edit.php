@@ -108,7 +108,7 @@ if (isset($_POST['idAdherent']) and isset($_POST['nomAdherent']) and isset($_POS
 
             <br><br>
 
-            <input type="submit" name="ModifierAdherent" value="Modifier" >
+            <input type="submit" class="btn btn-info" name="ModifierAdherent" value="Modifier" >
         </fieldset>
     </div>
 </form>
