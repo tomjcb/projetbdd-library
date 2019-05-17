@@ -17,10 +17,13 @@ $donnees = $reponse->fetch();?>
 else{ ?>
     <div class="alert alert-danger"> Êtes vous sûr de vouloir supprimer cet auteur ? </div>
 <?php } ?>
-
-<a class="btn btn-success" href="Auteur_delete.php?id=<?= $_GET['id'];?>&confirm=1">Valider</a>
-<a> | </a>
-<a class="btn btn-danger" href="Auteur_delete.php?id=<?=$_GET['id'];?>&confirm=2">Annuler </a>
+<div class="row">
+    <div class="confirmSuppr">
+        <a class="btn btn-success" href="Auteur_delete.php?id=<?= $_GET['id'];?>&confirm=1">Valider</a>
+        <a> | </a>
+        <a class="btn btn-danger" href="Auteur_delete.php?id=<?=$_GET['id'];?>&confirm=2">Annuler </a>
+    </div>
+</div>
 <?php
 if(isset($_GET["confirm"]) AND $_GET["confirm"] == 1) {
     if (isset($_GET['id']) and is_numeric($_GET['id'])) {
