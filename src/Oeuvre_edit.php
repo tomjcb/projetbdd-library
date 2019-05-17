@@ -49,46 +49,58 @@ if (isset($_POST['titre']) and isset($_POST['dateParution']) and isset($_POST['a
 }
 ?>
 
-
 <?php include("v_head.php"); ?>
-<body>
 <?php include ('v_nav.php'); ?>
+<div class="row">
+    <div class="title">Modifier une oeuvre</div>
+</div>
+
 <form method="post" action="Oeuvre_edit.php">
     <div class="row">
-        <fieldset>
-            <legend>Modifier une oeuvre</legend>
+        <fieldset class="element-center">
             <!-- ## Pour conserver la valeur de l'id -->
             <input name="noOeuvre" type="hidden" value="<?php if (isset($donnees['noOeuvre'])) echo $donnees['noOeuvre'] ?>">
-            <label>Titre</label>
-            <input type="text" name="titre" size="18" value="<?php if (isset($donnees['titre'])) echo $donnees['titre'] ?>" >
-            <?php if (isset($erreurs['titre']))
-                echo '<div class="alertdanger">'.$erreurs['titre'].'</div>';
-            ?>
 
-            <br><br>
-
-            <label>Date de parution</label>
-            <input type="date" name="dateParution" size="18" value="<?php if (isset($donnees['dateParution'])) echo $donnees['dateParution'] ?>" >
-            <?php if (isset($erreurs['dateParution']))
-                echo '<div class="alertdanger">'.$erreurs['dateParution'].'</div>';
-            ?>
-
-            <br><br>
-
-            <label>Auteur</label>
-            <select name="auteurs">
-                <?php
-                if(isset($data[0])){
-                foreach($data as $values){ ?>
-                    <option value="<?php echo $values['idAuteur'] ?>" <?php if($donnees['idAuteur'] == $values['idAuteur']){echo "selected";} ?> ><?php echo $values['nomAuteur'];?></option>
-                    <?php }
-                }
+            <div class="col-md-2 offset-md-5">
+                <label>Titre</label>
+                <br>
+                <input type="text" class="form-control" name="titre" size="18" value="<?php if (isset($donnees['titre'])) echo $donnees['titre'] ?>" >
+                <?php if (isset($erreurs['titre']))
+                    echo '<br><div class="alert alert-danger">'.$erreurs['titre'].'</div>';
                 ?>
+            </div>
 
-            </select>
+            <br><br>
 
-            <input type="submit" name="ModifierOeuvre" value="Modifier" >
+            <div class="col-md-2 offset-md-5">
+                <label>Date de parution</label>
+                <br>
+                <input type="text" class="form-control" name="dateParution" size="18" value="<?php if (isset($donnees['dateParution'])) echo $donnees['dateParution'] ?>" >
+                <?php if (isset($erreurs['dateParution']))
+                    echo '<br><div class="alert alert-danger">'.$erreurs['dateParution'].'</div>';
+                ?>
+            </div>
+
+            <br><br>
+
+            <div class="col-md-2 offset-md-5">
+                <label>Auteur</label>
+                <br>
+                <select class="browser-default custom-select" name="auteurs">
+                    <?php
+                    if(isset($data[0])){
+                    foreach($data as $values){ ?>
+                        <option value="<?php echo $values['idAuteur'] ?>" <?php if($donnees['idAuteur'] == $values['idAuteur']){echo "selected";} ?> ><?php echo $values['nomAuteur'];?></option>
+                        <?php }
+                    }
+                    ?>
+                </select>
+            </div>
+
+            <br><br>
+            <input type="submit" class="btn btn-info" name="ModifierOeuvre" value="Modifier" >
         </fieldset>
     </div>
 </form>
-</body>
+
+<?php include ('v_foot.php'); ?>
