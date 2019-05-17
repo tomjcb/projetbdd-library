@@ -1,35 +1,40 @@
 <?php include("v_head.php");  ?>
 <?php include ("v_nav.php");  ?>
 <?php include ("connexion_bdd.php");?>
-
-
-
-        <div> Êtes vous sûr de vouloir supprimer cette oeuvre ?</div>
-    <form method="post" action="Oeuvre_delete.php?id=<?= $_GET['id'];?>&confirm=1">
-        <button type="submit" class="btn btn-danger">Annuler</button>
-    </form>
-    <form method="post" action="Oeuvre_delete.php?id=<?= $_GET['id'];?>&confirm=2">
-    <button type="submit" class="btn btn-success">Valider</button>
-    </form>
-
-
-
 <?php
-if(isset($_GET["confirm"])){
-    if($_GET["confirm"] == 2){
-        if(isset($_GET["id"]) AND is_numeric($_GET["id"])){
-            // ## accès au modèle
-            $id=htmlentities($_GET['id']);
-            $ma_requete_SQL= "DELETE FROM OEUVRE WHERE noOeuvre = ".$id.";";
-            echo $ma_requete_SQL;
-            $bdd->exec($ma_requete_SQL);
+$id = htmlentities($_GET['id']);
+$ma_requete_SQL = "SELECT OEUVRE.noOeuvre,
+    COUNT(e1.noExemplaire) AS nbrExemplaire
+    FROM OEUVRE
+    LEFT JOIN EXEMPLAIRE e1 ON e1.noOeuvre = OEUVRE.noOeuvre
+    WHERE OEUVRE.noOeuvre = " . $id . ";";
+$reponse = $bdd->query($ma_requete_SQL);
+$donnees = $reponse->fetch();
+?>
+<?php if($donnees['nbrExemplaire'] != 0 ){?>
+    <div class="alert alert-danger"> Cette oeuvre est liée à <?php echo $donnees['nbrExemplaire']; ?> exemplaires. Êtes vous sûr de vouloir la supprimer ?</div>
+<?php }
+else{ ?>
+    <div class="alert alert-danger"> Êtes vous sûr de vouloir supprimer cette oeuvre ? </div>
+<?php } ?>
 
-            header("Location: Oeuvre_show.php");
-        }
-    }
-    else{
+    <a class="btn btn-success" href="Oeuvre_delete.php?id=<?= $_GET['id'];?>&confirm=1">Valider</a>
+    <a> | </a>
+    <a class="btn btn-danger" href="Oeuvre_delete.php?id=<?=$_GET['id'];?>&confirm=2">Annuler </a>
+<?php
+if(isset($_GET["confirm"]) AND $_GET["confirm"] == 1) {
+    if (isset($_GET["id"]) AND is_numeric($_GET["id"])) {
+        // ## accès au modèle
+        $id = htmlentities($_GET['id']);
+        $ma_requete_SQL = "DELETE FROM OEUVRE WHERE noOeuvre = " . $id . ";";
+        echo $ma_requete_SQL;
+        $bdd->exec($ma_requete_SQL);
+
         header("Location: Oeuvre_show.php");
     }
+}
+if(isset($_GET["confirm"]) AND $_GET["confirm"] == 2) {
+    header("Location: Oeuvre_show.php");
 }
 
 ?>

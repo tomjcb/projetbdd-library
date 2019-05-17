@@ -66,7 +66,7 @@ $donnees = $reponse->fetchAll();
                         <td>
                             <a class="btn btn-info" href="Oeuvre_edit.php?id=<?= $value['noOeuvre']; ?>"><i class="fa fa-wrench"></i></a>
                             <a> | </a>
-                            <a class="btn btn-danger" href="Oeuvre_delete.php?id=<?= $value['noOeuvre']; ?>"><i class="fa fa-trash"></i></a>
+                            <a class="btn btn-danger" href="Oeuvre_delete.php?id=<?=$value['noOeuvre'];?>&confirm=0"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
