@@ -8,11 +8,6 @@ include('connexion_bdd.php');
 
 if (isset($_GET["id"]) AND is_numeric($_GET["id"])){
     $id=htmlentities($_GET['id']);
-    /*$ma_requete_SQL="SELECT EXEMPLAIRE.noExemplaire, EXEMPLAIRE.etat, EXEMPLAIRE.dateAchat, EXEMPLAIRE.prix, OEUVRE.noOeuvre, AUTEUR.nomAuteur, AUTEUR.prenomAuteur
-                    FROM OEUVRE
-                    INNER JOIN AUTEUR ON AUTEUR.idAuteur = OEUVRE.idAuteur
-                    INNER JOIN EXEMPLAIRE ON EXEMPLAIRE.noOeuvre = OEUVRE.noOeuvre
-                    WHERE EXEMPLAIRE.noOeuvre = ".$id.";";*/
     $ma_requete_SQL ="
     SELECT E1.noExemplaire, E1.etat, E1.dateAchat, E1.prix, OEUVRE.titre, OEUVRE.noOeuvre, OEUVRE.dateParution
     , E1.noExemplaire AS Exemplaire

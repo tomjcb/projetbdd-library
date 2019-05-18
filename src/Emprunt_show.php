@@ -10,12 +10,15 @@
 
 include("connexion_bdd.php");
 
-$requete ="SELECT * , DATEDIFF(DATE(NOW()), DATE_ADD(EMPRUNT.dateEmprunt, INTERVAL 30 DAY)) AS retard,
-            DATEDIFF(DATE_ADD(EMPRUNT.dateRendu, INTERVAL 30 DAY), EMPRUNT.dateRendu) AS diffEmprRendu
+$requete ="SELECT * , 
+            DATEDIFF(curdate(), DATE_ADD(EMPRUNT.dateEmprunt, INTERVAL 90 DAY)) AS RETARD,
+            DATEDIFF(EMPRUNT.dateRendu, EMPRUNT.dateEmprunt) AS diffEmprRendu,
+            DATEDIFF(curdate(),dateEmprunt) as nbJoursEmprunt
             FROM adherent
             JOIN emprunt ON adherent.idAdherent=emprunt.idAdherent
             JOIN exemplaire ON emprunt.noExemplaire = exemplaire.noExemplaire
-            JOIN oeuvre ON exemplaire.noOeuvre = oeuvre.noOeuvre;";
+            JOIN oeuvre ON exemplaire.noOeuvre = oeuvre.noOeuvre
+            ORDER BY adherent.nomAdherent;";
 $reponse = $bdd->query($requete);
 $donnees = $reponse->fetchAll();
 
@@ -32,7 +35,8 @@ $donnees = $reponse->fetchAll();
                     <th>Titre</th>
                     <th>Date d'emprunt</th>
                     <th>Date de rendu</th>
-                    <th>Exemplaires</th>
+                    <th>N° exemplaire</th>
+                    <th>Durée d'emprunt</th>
                     <th>Retard</th>
                     <th>Opération</th>
                 </tr>
@@ -46,20 +50,37 @@ $donnees = $reponse->fetchAll();
                             <?php echo $value['titre']; ?>
                         </td>
                         <td>
-                            <?php echo $value['dateEmprunt']; ?>
+                            <?php echo date("d/m/Y", strtotime($value['dateEmprunt'])); ?>
                         </td>
                         <td>
-                            <?php echo $value['dateRendu']; ?>
+                            <?php
+                            if ($value['dateRendu'] != "") {
+                                echo date("d/m/Y", strtotime($value['dateRendu']));
+                            }
+                            else {
+                                echo "";
+                            }?>
+
                         </td>
                         <td>
                             <?php echo $value['noExemplaire']; ?>
                         </td>
                         <td>
                             <?php
-                            if ($value['dateRendu'] == "" || $value['dateRendu'] == NULL || $value['dateRendu'] == 01/01/1970) {
-                                echo $value['retard'];
-                            }else {
+                            if ($value['dateRendu'] != "") {
                                 echo $value['diffEmprRendu'];
+                            }
+                            else {
+                                echo $value['nbJoursEmprunt'];
+                            }
+                            ?>
+                        </td>
+                        <td class="retard">
+                            <?php
+                            if ($value['dateRendu'] == ""){
+                                if ($value['RETARD'] > 0) {
+                                    echo $value['RETARD'];
+                                }
                             }
                             ?>
                         </td>

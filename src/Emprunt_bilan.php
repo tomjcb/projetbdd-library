@@ -26,61 +26,63 @@ $donnees = $reponse->fetchAll();
 
 
     <div class="row">
-        <div class="title">Récapitulatif des emprunts</div>
+        <div class="title">Bilan des emprunts</div>
     </div>
     <div class="row">
         <div class="container">
             <div class="table-responsive-sm">
                 <table class="table table-bordered table-hover">
                     <caption> Récapitulatif des Emprunts </caption>
-                    <?php if(isset($donnees[0])): ?>
-                        <thead class="table-head">
+                    <?php if(isset($donnees[0])){ ?>
+                    <thead class="table-head">
+                    <tr>
+                        <th>Nom adherent</th>
+                        <th>Titre de l'oeuvre</th>
+                        <th>Date emprunt</th>
+                        <th>N° Exemplaire</th>
+                        <th>Retard (jours)</th>
+                        <th>Pénalités (€)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($donnees as $value) { ?>
                         <tr>
-                            <th>Nom adherent</th>
-                            <th>Titre de l'oeuvre</th>
-                            <th>Date emprunt</th>
-                            <th>N° Exemplaire</th>
-                            <th>Retard (jours)</th>
-                            <th>Pénalités</th>
+                            <td>
+                                <?php echo $value['nomAdherent']; ?>
+                            </td>
+                            <td>
+                                <?php echo($value['titre']); ?>
+                            </td>
+                            <td>
+                                <?php echo date("d/m/Y", strtotime($value['dateEmprunt'])); ?>
+                            </td>
+                            <td>
+                                <?php echo($value['noExemplaire']); ?>
+                            </td>
+                            <td>
+                                <?php
+                                if ($value['RETARD'] > 0) {
+                                    echo($value['RETARD']);
+                                } ?>
+                            </td>
+                            <td>
+                                <?php
+                                if ($value['dette'] > 0) {
+                                    echo $value['dette']; ?><?php
+                                } else {
+                                    echo "0";
+                                } ?>
+                            </td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach ($donnees as $value): ?>
-                            <tr>
-                                <td>
-                                    <?php echo $value['nomAdherent']; ?>
-                                </td>
-                                <td>
-                                    <?php echo($value['titre']); ?>
-                                </td>
-                                <td>
-                                    <?php echo date("d/m/Y", strtotime($value['dateEmprunt'])) ; ?>
-                                </td>
-                                <td>
-                                    <?php echo($value['noExemplaire']); ?>
-                                </td>
-                                <td>
-                                    <?php echo($value['RETARD']); ?>
-                                </td>
-                                <td>
-                                    <?php
-                                    if ($value['dette']>0) {
-                                        echo $value['dette'];?> <?php
-                                    }
-                                    else{
-                                        echo "";
-                                    }?>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    <?php else: ?>
+                    <?php }
+                    } else{ ?>
                         <tr>
                             <td>
                                 Pas d'oeuvre dans la base de données
                             </td>
                         </tr>
-                    <?php endif; ?>
+                    <?php } ?>
+                    </tbody>
                 </table>
             </div>
         </div>

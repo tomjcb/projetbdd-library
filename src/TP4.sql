@@ -72,3 +72,13 @@ FIELDS TERMINATED BY ',';
 
 UPDATE EMPRUNT SET dateRendu = NULL WHERE CAST(dateRendu AS CHAR(10))='0000-00-00';
 UPDATE OEUVRE SET dateParution = NULL WHERE CAST(dateParution AS CHAR(10))='0000-00-00';
+
+
+SELECT OEUVRE.titre, EXEMPLAIRE.noExemplaire, EMPRUNT.dateEmprunt,
+                    DATEDIFF(curdate(),dateEmprunt) as nbJours,
+                    curdate() as dateJour
+                    FROM ADHERENT
+                    JOIN EMPRUNT ON EMPRUNT.idAdherent=ADHERENT.idAdherent
+                    JOIN EXEMPLAIRE ON EMPRUNT.noExemplaire = EXEMPLAIRE.noExemplaire
+                    JOIN OEUVRE ON EXEMPLAIRE.noOeuvre = OEUVRE.noOeuvre
+                    WHERE ADHERENT.idAdherent = 2 AND EMPRUNT.dateRendu IS NULL;

@@ -89,7 +89,7 @@ if( isset($_POST['etat']) AND isset($_POST['dateAchat']) AND isset($_POST['prix'
     <div class="row">
         <fieldset class="element-center">
             <div class="col-md-2 offset-md-5">
-                <div class="title_oeuvre">
+                <div class="title-2">
                     Titre : <?php echo $donnees['titre'] ; ?> de <?php echo $donnees['prenomAuteur']." ".$donnees['nomAuteur']; ?> <br> <br>
                 </div>
             </div>
@@ -140,4 +140,4 @@ if( isset($_POST['etat']) AND isset($_POST['dateAchat']) AND isset($_POST['prix'
         </fieldset>
     </div>
 </form>
-<?php include("v_foot.php.php");?>
+<?php include("v_foot.php");?>
