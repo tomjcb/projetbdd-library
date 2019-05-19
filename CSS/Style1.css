@@ -203,6 +203,7 @@ alert-danger{
 }
 
 .retard{
+    margin: 0;
     color :red;
     font-weight: bold;
 }

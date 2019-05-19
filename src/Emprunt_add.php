@@ -49,6 +49,10 @@ if (isset($_POST['idAdherent'])){
     $idAdherent = $_POST['idAdherent'];
     $selec = true;
 
+    $ma_requete_sql4 ="SELECT nomAdherent FROM adherent where idAdherent = ".$idAdherent.";";
+    $reponse4 = $bdd->query($ma_requete_sql4);
+    $donnees4 = $reponse4->fetchAll();
+
     $ma_requete_sql3 ="SELECT E2.noExemplaire, EXEMPLAIRE.noExemplaire AS noExemplaireExistant, E2.etat, OEUVRE.titre, OEUVRE.noOeuvre
     FROM EXEMPLAIRE
     INNER JOIN OEUVRE
@@ -72,6 +76,9 @@ if (isset($_POST['idAdherent'])){
 <?php include ("v_nav.php");  ?>
 
 <div class="row">
+    <div class="title">Ajouter un emprunt</div>
+</div>
+<div class="row">
     <div class="container">
         <?php if($selec == false){ ?>
         <form class="col-12" action="Emprunt_add.php" method="post">
@@ -86,14 +93,27 @@ if (isset($_POST['idAdherent'])){
                         <?php }
                     ?>
                 </select>
-                <input class="btn btn-lg btn-primary" type="submit" name="valider" value="Valider" >
+                <div class="scnd">
+                    <input class="btn btn-lg btn-primary" type="submit" name="valider" value="Valider" >
+                </div>
             </div>
         </form>
     <?php }
     if ($selec == true){
     ?>
+        <div class="row">
+            <div class="title-2">
+                <?php foreach ($donnees4 as $value){?>
+                    Adhérent : <?php echo $value['nomAdherent'] ; } ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container scnd">
+                <a class="btn btn-lg btn-primary" href="Emprunt_add.php"> Changer d'adhérent </a>
+            </div>
+        </div>
         <form class="col-12" action="Emprunt_add.php" method="post">
-            <div class="col-12 form-group" id="noExemplaire">
+            <div class="form-group" id="noExemplaire">
                 <label>Exemplaire d'une oeuvre : </label>
                 <select name="noExemplaire" class="form-control">
                     <?php
@@ -106,7 +126,7 @@ if (isset($_POST['idAdherent'])){
                 </select>
             </div>
             <div class="form-group">
-                <label>Date de Emprunt</label>
+                <label>Date de l'emprunt</label>
                 <?php
                 if (isset($donnees['dateEmprunt'])) echo '<input  class="form-control" name="dateEmprunt" type="text" size="18" value="'.date("d/m/Y", strtotime($value['dateEmprunt'])).'"/>';
                 else echo '<input  class="form-control" name="dateEmprunt" type="text" size="18" value="'.$today['mday'].'-'.$today['mon'].'-'.$today['year'].'"/>';

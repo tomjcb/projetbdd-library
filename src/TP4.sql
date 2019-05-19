@@ -74,11 +74,8 @@ UPDATE EMPRUNT SET dateRendu = NULL WHERE CAST(dateRendu AS CHAR(10))='0000-00-0
 UPDATE OEUVRE SET dateParution = NULL WHERE CAST(dateParution AS CHAR(10))='0000-00-00';
 
 
-SELECT OEUVRE.titre, EXEMPLAIRE.noExemplaire, EMPRUNT.dateEmprunt,
-                    DATEDIFF(curdate(),dateEmprunt) as nbJours,
-                    curdate() as dateJour
-                    FROM ADHERENT
-                    JOIN EMPRUNT ON EMPRUNT.idAdherent=ADHERENT.idAdherent
-                    JOIN EXEMPLAIRE ON EMPRUNT.noExemplaire = EXEMPLAIRE.noExemplaire
-                    JOIN OEUVRE ON EXEMPLAIRE.noOeuvre = OEUVRE.noOeuvre
-                    WHERE ADHERENT.idAdherent = 2 AND EMPRUNT.dateRendu IS NULL;
+/*SELECT * FROM EMPRUNT;
+
+DELETE FROM EMPRUNT WHERE (idAdherent = 2 AND noExemplaire = 4 AND dateEmprunt = '2018-12-01' );
+
+SELECT * FROM EMPRUNT;*/

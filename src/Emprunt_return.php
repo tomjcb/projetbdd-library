@@ -18,7 +18,7 @@ if (isset($_POST['idAdherent'])){
     $reponse2 = $bdd->query($ma_requete_sql2);
     $donnees2 = $reponse2->fetchAll();
 
-    $ma_requete_sql3 = "SELECT OEUVRE.titre, EXEMPLAIRE.noExemplaire, EMPRUNT.dateEmprunt,
+    $ma_requete_sql3 = "SELECT adherent.idAdherent, OEUVRE.titre, EXEMPLAIRE.noExemplaire, EMPRUNT.dateEmprunt,
                     DATEDIFF(curdate(),dateEmprunt) as nbJours,
                     curdate() as dateJour
                     FROM ADHERENT
@@ -29,21 +29,41 @@ if (isset($_POST['idAdherent'])){
     $reponse3 = $bdd->query($ma_requete_sql3);
     $donnees3 = $reponse3->fetchAll();
 
-    $today = getdate();
 }
 
+if (isset($_GET['idAdherent'])){
+    $donnees['idAdherent']=htmlentities($_GET['idAdherent']);
+    $idAdherent = $_GET['idAdherent'];
+    $selec = true;
 
-if (isset($_POST['idAdherent']) AND isset($_POST['noExemplaire']) ) {
+    $ma_requete_sql2 ="SELECT nomAdherent FROM adherent where idAdherent = ".$idAdherent.";";
+    $reponse2 = $bdd->query($ma_requete_sql2);
+    $donnees2 = $reponse2->fetchAll();
 
-    $donnees['idAdherent']=htmlentities($_POST['idAdherent']);
-    $donnees['noExemplaire']=htmlentities($_POST['noExemplaire']);
+    $ma_requete_sql3 = "SELECT adherent.idAdherent, OEUVRE.titre, EXEMPLAIRE.noExemplaire, EMPRUNT.dateEmprunt,
+                    DATEDIFF(curdate(),dateEmprunt) as nbJours,
+                    curdate() as dateJour
+                    FROM ADHERENT
+                    JOIN EMPRUNT ON EMPRUNT.idAdherent=ADHERENT.idAdherent
+                    JOIN EXEMPLAIRE ON EMPRUNT.noExemplaire = EXEMPLAIRE.noExemplaire
+                    JOIN OEUVRE ON EXEMPLAIRE.noOeuvre = OEUVRE.noOeuvre
+                    WHERE ADHERENT.idAdherent = ".$idAdherent." AND EMPRUNT.dateRendu IS NULL;";
+    $reponse3 = $bdd->query($ma_requete_sql3);
+    $donnees3 = $reponse3->fetchAll();
+
+}
+
+if (isset($_GET['idAdherent']) AND isset($_GET['noExemplaire']) ) {
+
+    $donnees['idAdherent']=htmlentities($_GET['idAdherent']);
+    $donnees['noExemplaire']=htmlentities($_GET['noExemplaire']);
 
     $ma_requete_SQL2 = "UPDATE EMPRUNT SET 
-                   dateRendu = ". $today ."
+                   dateRendu = curdate()
                    where noExemplaire = " . $donnees['noExemplaire'] . ";";
     $bdd->exec($ma_requete_SQL2);
 
-    header("Location: Emprunt_return.php?idAdherent=".$donnees['idAdherent']);
+    header("Location: Emprunt_return.php?idAdherent=".$_GET['idAdherent']);
 }
 
 ?>
@@ -111,7 +131,7 @@ if (isset($_POST['idAdherent']) AND isset($_POST['noExemplaire']) ) {
                                 <?php echo date("d/m/Y", strtotime($value['dateJour']));?>
                             </td>
                             <td>
-                                <a class="btn btn-secondary" role="button" href="Emprunt_show.php">Rendre</a>
+                                <a class="btn btn-secondary" role="button" href="Emprunt_return.php?idAdherent=<?= $value['idAdherent'] ?>&noExemplaire=<?= $value['noExemplaire']?>&dateEmprunt=<?= $value['dateEmprunt']?>">Rendre</a>
                             </td>
                         </tr>
                         <?php }
@@ -125,6 +145,12 @@ if (isset($_POST['idAdherent']) AND isset($_POST['noExemplaire']) ) {
                     </tbody>
                 </table>
             </div>
+
+        <div class="row">
+            <div class="container scnd">
+                <a class="btn btn-lg btn-primary" href="Emprunt_return.php"> Changer d'adhérent </a>
+            </div>
+        </div>
         <?php }?>
     </div>
 </div>

@@ -4,14 +4,14 @@
 
 $ma_requete_SQL = "SELECT ADHERENT.nomAdherent, ADHERENT.idAdherent, ADHERENT.adresse, ADHERENT.datePaiement,
                   IF(CURRENT_DATE()>DATE_ADD(datePaiement, INTERVAL 1 YEAR),'Paiement en retard depuis le ',0) as retard,
-                   DATE_ADD(datePaiement, INTERVAL 1 YEAR) as datePaiementFutur
-                   FROM ADHERENT
-                   ORDER BY ADHERENT.nomAdherent; ";
+                  DATE_ADD(datePaiement, INTERVAL 1 YEAR) as datePaiementFutur
+                  FROM ADHERENT
+                  ORDER BY ADHERENT.nomAdherent; ";
 
 $reponse = $bdd->query($ma_requete_SQL);
 $donnees = $reponse->fetchAll();
 
-$ma_requete_SQL2 = "SELECT ADHERENT.nomAdherent, count(EMPRUNT.noExemplaire) as nbEmprunt FROM ADHERENT
+$ma_requete_SQL2 = "SELECT ADHERENT.nomAdherent, count(emprunt.dateEmprunt)-count(emprunt.dateRendu) as nbEmprunts FROM ADHERENT
 INNER JOIN EMPRUNT on EMPRUNT.idAdherent = ADHERENT.idAdherent
 GROUP BY ADHERENT.nomAdherent;";
 $reponse2 = $bdd->query($ma_requete_SQL2);
@@ -30,13 +30,13 @@ $donnees2 = $reponse2->fetchAll();
                 <thead class="table-head">
                 <tr><th>Nom</th>
                     <th>Adresse</th>
-                    <th>datePaiement</th>
-                    <th>information</th>
-                    <th>Opération</th>
+                    <th>Date Paiement</th>
+                    <th>Informations</th>
+                    <th>Opérations</th>
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($donnees as $value): ?>
+                <?php foreach ($donnees as $value):?>
                     <tr>
                         <td>
                             <?php echo($value['nomAdherent']); ?>
@@ -50,19 +50,18 @@ $donnees2 = $reponse2->fetchAll();
                         </td>
                         <td>
 
-                            <?php foreach ($donnees2 as $value2): ?>
-                                <?php if ($value["nomAdherent"] == $value2["nomAdherent"]): ?>
-                                    <?php echo ($value2['nbEmprunt']) ?>
-                                    <?php echo " exemplaire(s) emprunté(s)" ?>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                            <?php
+                            <?php foreach ($donnees2 as $value2) {
+                                if ($value["nomAdherent"] == $value2["nomAdherent"]) {
+                                    if ($value2['nbEmprunts']!=0) {
+                                        echo $value2['nbEmprunts'] . " emprunts en cours";
+                                    }
+                                }
+                            }
+
 
                             if ($value['retard'] != '0') {
                                 ?><p class="retard"><?php
-                                echo $value['retard'], date("d/m/Y", strtotime($value['datePaiementFutur']));
-                            }else {
-                                echo " ";?></p><?php
+                                echo $value['retard'], date("d/m/Y", strtotime($value['datePaiementFutur']));?></p><?php
                             }
                             ?>
                             </br>
@@ -78,7 +77,7 @@ $donnees2 = $reponse2->fetchAll();
             <?php else: ?>
                 <tr>
                     <td>
-                        Pas d'Adherent dans la base de données
+                        Pas d'adhérents dans la base de données
                     </td>
                 </tr>
             <?php endif; ?>

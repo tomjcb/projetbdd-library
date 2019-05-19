@@ -101,7 +101,7 @@ if (isset($_GET["id"]) AND is_numeric($_GET["id"])){
 
 <div class="row">
     <div class="container scnd">
-        <a href="Exemplaire_add.php?id=<?php echo $id; ?>"> Ajouter un Exemplaire </a>
+        <a class="btn btn-lg btn-primary" href="Exemplaire_add.php?id=<?php echo $id; ?>"> Ajouter un Exemplaire </a>
     </div>
 </div>
 
