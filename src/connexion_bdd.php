@@ -8,7 +8,7 @@
 
 <?php
 define("hostname","localhost");
-define("database","mysql");
+define("database","BDD_tjacob3");
 define("username","root");
 define("password","");
 

@@ -91,3 +91,5 @@ $donnees2 = $reponse2->fetchAll();
         <a class="btn btn-lg btn-primary" href="Adherent_add.php" role="button"> Ajouter un Adherent </a>
     </div>
 </div>
+
+<?php include ("v_foot.php");  ?>

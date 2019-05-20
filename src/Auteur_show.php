@@ -66,3 +66,4 @@ $donnees = $reponse->fetchAll();
         <a class="btn btn-lg btn-primary" href="Auteur_add.php"> Ajouter un Auteur </a>
     </div>
 </div>
+<?php include ("v_foot.php");  ?>

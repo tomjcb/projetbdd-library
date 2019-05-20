@@ -266,5 +266,83 @@ table a{
 
 
 /*
-------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Mise en forme du Footer */
+
+
+footer.row{
+    margin-right:0;
+    margin-left: 0;
+    background-color: #17a2b8;
+    color:white;
+    padding-top:15px;
+    padding-bottom: 15px;
+}
+
+a.lien{
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+a.iut{
+    border-right: solid 1px #F5F5F5;
+    margin-bottom: 15px;
+}
+a.info{
+    border-left: solid 1px #F5F5F5;
+    margin-bottom: 15px;
+}
+
+div.bot{
+    margin: 0;
+    padding:15px;
+    padding-bottom: 0;
+    border-bottom: solid 2px #F5F5F5;
+}
+
+span.bulle{
+    visibility: hidden;
+    width: 240px;
+    background-color: #F5F5F5;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 150%;
+    left: 50%;
+    margin-left: -120px;
+}
+span.bulle::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -11px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #F5F5F5 transparent;
+}
+a.iut:hover .bulle{
+    visibility: visible;
+}
+a.info:hover .bulle{
+    visibility: visible;
+}
+
+
+div.sign{
+    margin: 0;
+    padding: 15px;
+}
+
+p.sign{
+    margin:0;
+    text-align: center;
+}
+
+
+/* Fin mise en forme Footer
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
