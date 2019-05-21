@@ -75,6 +75,8 @@ if (isset($_POST['idAdherent'])){
 <?php include("v_head.php");  ?>
 <?php include ("v_nav.php");  ?>
 
+<div class="contenu">
+
 <div class="row">
     <div class="title">Ajouter un emprunt</div>
 </div>
@@ -82,7 +84,7 @@ if (isset($_POST['idAdherent'])){
     <div class="container">
         <?php if($selec == false){ ?>
         <form class="col-12" action="Emprunt_add.php" method="post">
-            <div class="form-group col-12" id="idAdherent">
+            <div class="form-group" id="idAdherent">
                 <label>Nom de l'adhérent :</label>
                 <select name="idAdherent" class="form-control">
                     <?php
@@ -93,9 +95,9 @@ if (isset($_POST['idAdherent'])){
                         <?php }
                     ?>
                 </select>
-                <div class="scnd">
-                    <input class="btn btn-lg btn-primary" type="submit" name="valider" value="Valider" >
-                </div>
+            </div>
+            <div class="scnd">
+                <input class="btn btn-lg btn-primary" type="submit" name="valider" value="Valider" >
             </div>
         </form>
     <?php }
@@ -139,6 +141,9 @@ if (isset($_POST['idAdherent'])){
         </form>
         <?php }?>
     </div>
+</div>
+
+
 </div>
 
 <?php include ("v_foot.php"); ?>

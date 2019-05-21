@@ -16,6 +16,8 @@ $donnees = $reponse->fetchAll();
 // ## affichage de la vue
 ?>
 
+<div class="contenu">
+
 <div class="row">
     <div class="title">Gestion des auteurs</div>
 </div>
@@ -65,5 +67,8 @@ $donnees = $reponse->fetchAll();
     <div class="container scnd">
         <a class="btn btn-lg btn-primary" href="Auteur_add.php"> Ajouter un Auteur </a>
     </div>
+</div>
+
+
 </div>
 <?php include ("v_foot.php");  ?>

@@ -13,6 +13,10 @@ body{
     padding: 15px;
 }
 
+.contenu {
+    min-height: 530px;
+}
+
 /*
 ------------------------------------------------------------------------------------------------------------------------
                                             Mise en forme du top de la page
@@ -270,7 +274,7 @@ table a{
 Mise en forme du Footer */
 
 
-footer.row{
+footer{
     margin-right:0;
     margin-left: 0;
     background-color: #17a2b8;

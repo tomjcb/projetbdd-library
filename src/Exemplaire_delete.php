@@ -3,6 +3,13 @@ include("v_nav.php");
 include("v_head.php");
 
 include("connexion_bdd.php");
+
+?>
+
+<div class="contenu">
+
+<?php
+
 if(isset($_GET["id"]) AND isset($_GET['idoeuvre']) AND isset($_GET['present'])) {
     if($_GET['present'] == 'Emprunté' ){?>
         <div class="alert alert-danger"> Cet exemplaire est emprunté. Êtes vous sûr de vouloir le supprimer ?</div>
@@ -40,5 +47,8 @@ if(isset($_GET["id"]) AND isset($_GET['idoeuvre']) AND isset($_GET['present'])) 
         header("Location: Exemplaire_show.php?id=$idoeuvre");
     }
 
-}
-include("v_foot.php")  ?>
+}?>
+
+<div class="contenu">
+
+<?php include("v_foot.php")  ?>

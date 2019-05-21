@@ -24,7 +24,7 @@ $donnees = $reponse->fetchAll();
 
 ?>
 
-
+<div class="contenu">
     <div class="row">
         <div class="title">Bilan des emprunts</div>
     </div>
@@ -87,5 +87,5 @@ $donnees = $reponse->fetchAll();
             </div>
         </div>
     </div>
-
+</div>
 <?php include ("v_foot.php");

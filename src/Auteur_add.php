@@ -35,6 +35,8 @@ if (isset($_POST["nomAuteur"]) AND isset($_POST['prenomAuteur'])) {
 
 ?>
 
+<div class="contenu">
+
 <div class="row">
     <div class="title">Ajouter un auteur</div>
 </div>
@@ -69,5 +71,7 @@ if (isset($_POST["nomAuteur"]) AND isset($_POST['prenomAuteur'])) {
         </fieldset>
     </div>
 </form>
+
+<div class="contenu">
 
 <?php include ("v_foot.php");

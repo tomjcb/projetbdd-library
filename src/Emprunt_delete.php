@@ -2,7 +2,7 @@
 <?php include ("v_nav.php");  ?>
 
 <?php include ("connexion_bdd.php");
-
+$idAdherent = $_GET['idAdherent'];
 $selec = false;
 
 if (isset($_GET['idAdherent'])){
@@ -17,10 +17,9 @@ if (isset($_GET['idAdherent'])){
             JOIN exemplaire ON emprunt.noExemplaire = exemplaire.noExemplaire
             JOIN oeuvre ON exemplaire.noOeuvre = oeuvre.noOeuvre
             WHERE adherent.idAdherent = ". $idAdherent ."
-            ORDER BY adherent.nomAdherent;";
+            ORDER BY Exemplaire.noExemplaire ;";
     $reponse1 = $bdd->query($ma_requete_sql1);
     $donnees1 = $reponse1->fetchAll();
-
 
     $ma_requete_sql2 ="SELECT nomAdherent FROM adherent where idAdherent = ". $idAdherent .";";
     $reponse2 = $bdd->query($ma_requete_sql2);
@@ -32,21 +31,30 @@ if (isset($_GET['idAdherent']) && isset($_GET['noExemplaire']) && isset($_GET['d
     $noExemplaire = $_GET['noExemplaire'];
     $dateEmprunt = ($_GET['dateEmprunt']);
 
-    echo "DELETE FROM EMPRUNT 
-                        WHERE (idAdherent = ".$idAdherent." AND noExemplaire = ".$noExemplaire." AND dateEmprunt ='".$dateEmprunt."'); 
-                        ";
-
     $ma_requete_sql3 = "DELETE FROM EMPRUNT 
                         WHERE (idAdherent = ".$idAdherent." AND noExemplaire = ".$noExemplaire." AND dateEmprunt ='".$dateEmprunt."' ); 
                         ";
-    $reponse3 = $bdd->query($ma_requete_sql3);
-    $donnees3 = $reponse3->fetchAll();
-    header('Location: Emprunt_delete.php?idAdherent='.$adherent);
+
+    $bdd->exec($ma_requete_sql3);
+    header('Location: Emprunt_delete.php?idAdherent='.$idAdherent);
+
+}
+
+if (isset($_GET['idAdherent']) && isset($_GET['confirm'])) {
+    $idAdherent = $_GET['idAdherent'];
+
+    $ma_requete_sql3 = "DELETE FROM EMPRUNT 
+                        WHERE idAdherent = ".$idAdherent."; 
+                        ";
+
+    $bdd->exec($ma_requete_sql3);
+    header('Location: Emprunt_delete.php?idAdherent='.$idAdherent);
 
 }
 
 ?>
 
+<div class="contenu">
 
 <div class="row">
     <div class="container">
@@ -54,6 +62,11 @@ if (isset($_GET['idAdherent']) && isset($_GET['noExemplaire']) && isset($_GET['d
             <?php foreach ($donnees2 as $value){ ?>
             Aperçu des emprunts de <?php echo $value['nomAdherent']; ?>
             <?php } ?>
+        </div>
+        <div class="row">
+            <div class="container scnd">
+                <a class="btn btn-lg btn-primary" href="Emprunt_show.php"> Changer d'adhérent </a>
+            </div>
         </div>
         <div class="table-responsive-sm">
             <table class="table table-bordered table-hover">
@@ -126,3 +139,16 @@ if (isset($_GET['idAdherent']) && isset($_GET['noExemplaire']) && isset($_GET['d
         </div>
     </div>
 </div>
+<?php if (isset($donnees1[0])) { ?>
+<div class="row">
+    <div class="container scnd">
+        <?php foreach ($donnees2 as $value){ ?>
+            <a class="btn btn-danger" href="Emprunt_deleteAll.php?idAdherent=<?php echo $_GET['idAdherent'];?>">Supprimer tous les emprunts de <?php echo $value['nomAdherent']; ?></a>
+        <?php }?>
+    </div>
+</div>
+<?php } ?>
+
+</div>
+
+<?php include ('v_foot.php'); ?>

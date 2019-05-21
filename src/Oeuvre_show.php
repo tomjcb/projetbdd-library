@@ -22,6 +22,8 @@ $donnees = $reponse->fetchAll();
 // ## affichage de la vue
 ?>
 
+<div class="contenu">
+
 <div class="row">
     <div class="title">Gestion des oeuvres et exemplaires</div>
 </div>
@@ -87,5 +89,6 @@ $donnees = $reponse->fetchAll();
         <a class="btn btn-lg btn-primary" href="Oeuvre_add.php" role="button"> Ajouter une oeuvre </a>
     </div>
 </div>
-</body>
+
+</div>
 <?php include ("v_foot.php");  ?>

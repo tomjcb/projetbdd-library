@@ -6,20 +6,24 @@ include("v_nav.php");
 include('connexion_bdd.php');
 // ## accès au modèle
 
-if (isset($_GET["id"]) AND is_numeric($_GET["id"])){
-    $id=htmlentities($_GET['id']);
+if (isset($_GET["id"])){
+    $id=$_GET['id'];
+
+
     $ma_requete_SQL ="
     SELECT E1.noExemplaire, E1.etat, E1.dateAchat, E1.prix, OEUVRE.titre, OEUVRE.noOeuvre, OEUVRE.dateParution
     , E1.noExemplaire AS Exemplaire
     , E2.noExemplaire AS ExemplaireDispo
     , IF(E2.noExemplaire IS NULL, 'Emprunté', 'Disponible') as present
     FROM OEUVRE
-    LEFT JOIN EXEMPLAIRE E1 ON E1.noOeuvre = OEUVRE.noOeuvre
-    LEFT JOIN EXEMPLAIRE E2 ON E2.noExemplaire = E1.noExemplaire
+    JOIN EXEMPLAIRE E1 ON E1.noOeuvre = OEUVRE.noOeuvre
+    JOIN EXEMPLAIRE E2 ON E2.noExemplaire = E1.noExemplaire
     AND E2.noExemplaire NOT IN (SELECT EMPRUNT.noExemplaire FROM EMPRUNT WHERE EMPRUNT.dateRendu IS NULL)
-      WHERE OEUVRE.noOeuvre = ".$id."
+    WHERE OEUVRE.noOeuvre = ".$id." 
     ORDER BY E2.noExemplaire DESC;
     ";
+
+
     $reponse = $bdd->query($ma_requete_SQL);
     $donnees = $reponse->fetchAll();
 
@@ -37,6 +41,8 @@ if (isset($_GET["id"]) AND is_numeric($_GET["id"])){
 // ## affichage de la vue
 ?>
 
+<div class="contenu">
+
 <div class="row">
     <div class="title">Gestion des exemplaires</div>
 </div>
@@ -44,10 +50,10 @@ if (isset($_GET["id"]) AND is_numeric($_GET["id"])){
 <div class="row">
     <div class="container">
         <div class="row">
-        <div class="title_oeuvre">
+        <div class="title-2">
         Titre : <?php echo $donneesOeuvre["titre"]; ?> <br>
         Auteur : <?php echo $donneesOeuvre['nomAuteur']; ?> <br>
-        Date Parution : <?php echo $donneesOeuvre['dateParution']; ?> <br> <br>
+        Date Parution : <?php echo  date("d/m/Y", strtotime($donneesOeuvre['dateParution'])); ?> <br> <br>
         </div>
         </div>
         <table class="table table-bordered table-hover">
@@ -103,6 +109,8 @@ if (isset($_GET["id"]) AND is_numeric($_GET["id"])){
     <div class="container scnd">
         <a class="btn btn-lg btn-primary" href="Exemplaire_add.php?id=<?php echo $id; ?>"> Ajouter un Exemplaire </a>
     </div>
+</div>
+
 </div>
 
 <?php include("v_foot.php");?>

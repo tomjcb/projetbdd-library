@@ -36,6 +36,8 @@ if (isset($_POST['idAdherent'])){
 
 ?>
 
+<div class="contenu">
+
 <div class="row">
     <div class="container">
     <form class="col-12" action="Emprunt_show.php" method="post">
@@ -141,5 +143,6 @@ if (isset($_POST['idAdherent'])){
     </div>
 </div>
 
+</div>
 
 <?php include ("v_foot.php");  ?>

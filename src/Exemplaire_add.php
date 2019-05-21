@@ -83,6 +83,8 @@ if(isset($_POST['dateAchat']) AND isset($_POST['prix']))
 // affichage de la vue
 ?>
 
+<div class="contenu">
+
 <div class="row">
     <div class="title">Ajouter un exemplaire</div>
 </div>
@@ -149,3 +151,7 @@ if(isset($_POST['dateAchat']) AND isset($_POST['prix']))
         </fieldset>
     </div>
 </form>
+
+</div>
+
+<?php include ('v_foot.php'); ?>

@@ -11,6 +11,9 @@ $ma_requete_SQL = "SELECT OEUVRE.noOeuvre,
 $reponse = $bdd->query($ma_requete_SQL);
 $donnees = $reponse->fetch();
 ?>
+
+<div class="contenu">
+
 <?php if($donnees['nbrExemplaire'] != 0 ){?>
     <div class="alert alert-danger"> Cette oeuvre est liée à <?php echo $donnees['nbrExemplaire']; ?> exemplaires. Êtes vous sûr de vouloir la supprimer ?</div>
 <?php }
@@ -41,3 +44,7 @@ if(isset($_GET["confirm"]) AND $_GET["confirm"] == 2) {
 }
 
 ?>
+
+</div>
+
+<?php include ('v_foot.php'); ?>

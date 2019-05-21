@@ -6,7 +6,7 @@
  * Time: 18:14
  */?>
 
-</body>
+
 <footer class="row">
     <div class="container">
         <div class="bot nav col-sm-12">
@@ -24,4 +24,5 @@
         </div>
     </div>
 </footer>
+</body>
 </html>

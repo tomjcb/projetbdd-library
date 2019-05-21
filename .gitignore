@@ -3,3 +3,4 @@
 *.iml
 .idea/
 /src/connexion_bdd.php
+src/connexion_bdd.php

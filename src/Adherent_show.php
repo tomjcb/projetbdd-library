@@ -18,6 +18,8 @@ $reponse2 = $bdd->query($ma_requete_SQL2);
 $donnees2 = $reponse2->fetchAll();
 ?>
 
+<div class="contenu">
+
 <div class="row">
     <div class="title">Gestion des adhérents</div>
 </div>
@@ -90,6 +92,8 @@ $donnees2 = $reponse2->fetchAll();
     <div class="container scnd">
         <a class="btn btn-lg btn-primary" href="Adherent_add.php" role="button"> Ajouter un Adherent </a>
     </div>
+</div>
+
 </div>
 
 <?php include ("v_foot.php");  ?>

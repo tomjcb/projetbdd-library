@@ -67,6 +67,11 @@ if (isset($_GET['idAdherent']) AND isset($_GET['noExemplaire']) ) {
 }
 
 ?>
+
+
+
+<div class="contenu">
+
 <div class="row">
     <div class="title">Rendre un exemplaire</div>
 </div>
@@ -75,7 +80,7 @@ if (isset($_GET['idAdherent']) AND isset($_GET['noExemplaire']) ) {
     <div class="container">
         <?php if($selec == false){ ?>
         <form class="col-12" action="Emprunt_return.php" method="post">
-            <div class="form-group col-12" id="idAdherent">
+            <div class="form-group" id="idAdherent">
                 <label>Nom de l'adhérent :</label>
                 <select name="idAdherent" class="form-control">
                     <?php
@@ -86,6 +91,8 @@ if (isset($_GET['idAdherent']) AND isset($_GET['noExemplaire']) ) {
                     <?php }
                     ?>
                 </select>
+            </div>
+            <div class="scnd">
                 <input class="btn btn-lg btn-primary" type="submit" name="valider" value="Valider" >
             </div>
         </form>
@@ -155,5 +162,6 @@ if (isset($_GET['idAdherent']) AND isset($_GET['noExemplaire']) ) {
     </div>
 </div>
 
+</div>
 
 <?php include ("v_foot.php");?>

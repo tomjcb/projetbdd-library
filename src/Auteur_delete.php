@@ -11,8 +11,10 @@ $ma_requete_SQL = " SELECT AUTEUR.idAuteur,
 $reponse = $bdd->query($ma_requete_SQL);
 $donnees = $reponse->fetch();?>
 
+<div class="contenu">
+
 <?php if($donnees['nbrOeuvre'] != 0 ){?>
-    <div class="alert alert-danger"> Cet auteur est liée à <?php echo $donnees['nbrOeuvre']; ?> oeuvre(s). Êtes vous sûr de vouloir le supprimer ?</div>
+    <div class="alert alert-danger"> Cet auteur est lié à <?php echo $donnees['nbrOeuvre']; ?> oeuvre(s). Êtes-vous sûr de vouloir le supprimer ?</div>
 <?php }
 else{ ?>
     <div class="alert alert-danger"> Êtes vous sûr de vouloir supprimer cet auteur ? </div>
@@ -42,3 +44,7 @@ if(isset($_GET["confirm"]) AND $_GET["confirm"] == 2) {
 }
 
 ?>
+
+</div>
+
+<?php include ('v_foot.php'); ?>

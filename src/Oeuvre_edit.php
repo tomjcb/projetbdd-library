@@ -68,6 +68,7 @@ if (isset($_POST['titre']) and isset($_POST['dateParution']) and isset($_POST['a
 }
 ?>
 
+<div class="contenu">
 
 <div class="row">
     <div class="title">Modifier une oeuvre</div>
@@ -120,5 +121,7 @@ if (isset($_POST['titre']) and isset($_POST['dateParution']) and isset($_POST['a
         </fieldset>
     </div>
 </form>
+
+</div>
 
 <?php include ('v_foot.php'); ?>

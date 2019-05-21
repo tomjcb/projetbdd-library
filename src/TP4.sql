@@ -73,9 +73,9 @@ FIELDS TERMINATED BY ',';
 UPDATE EMPRUNT SET dateRendu = NULL WHERE CAST(dateRendu AS CHAR(10))='0000-00-00';
 UPDATE OEUVRE SET dateParution = NULL WHERE CAST(dateParution AS CHAR(10))='0000-00-00';
 
+/*
+SELECT * FROM EMPRUNT;
 
-/*SELECT * FROM EMPRUNT;
-
-DELETE FROM EMPRUNT WHERE (idAdherent = 2 AND noExemplaire = 4 AND dateEmprunt = '2018-12-01' );
+DELETE FROM EMPRUNT WHERE (idAdherent = 2 AND noExemplaire = 4 AND dateEmprunt ='2018-12-01' ); 
 
 SELECT * FROM EMPRUNT;*/

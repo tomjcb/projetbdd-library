@@ -66,6 +66,8 @@ if (isset($_POST['idAdherent']) and isset($_POST['nomAdherent']) and isset($_POS
     }
 }
 ?>
+
+<div class="contenu">
 <div class="row">
     <div class="title">Modifier un adhérent</div>
 </div>
@@ -112,5 +114,6 @@ if (isset($_POST['idAdherent']) and isset($_POST['nomAdherent']) and isset($_POS
         </fieldset>
     </div>
 </form>
+</div>
 
 <?php include ("v_foot.php");  ?>
